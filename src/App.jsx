@@ -71,11 +71,12 @@ export default function App() {
         </h1>
       </div>
 
-      <div className="absolute top-0 left-0 z-[-1] h-screen w-screen">
+      <div className="absolute top-0 left-0 -z-10 h-screen w-screen">
         <Canvas>
           <ambientLight intensity={0.5} />
           <Model />
         </Canvas>
+        <div className="absolute top-0 left-0 h-full w-full bg-linear-to-b from-transparent to-[#24150E] to-90%" />
       </div>
 
       <div className="flex w-full flex-col items-center gap-8">
