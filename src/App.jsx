@@ -6,6 +6,8 @@ import TempoControl from "./components/TempoControl";
 import SpeedControl from "./components/SpeedControl";
 import { SPEED_OPTIONS } from "./constants/speed";
 import TimeSignatureControl from "./components/TimeSignatureControl";
+import { Canvas } from "@react-three/fiber";
+import { Model } from "./components/Model";
 
 export default function App() {
   const [tempo, setTempo] = useState(120);
@@ -68,6 +70,14 @@ export default function App() {
           METRONOME
         </h1>
       </div>
+
+      <div className="absolute top-0 left-0 z-[-1] h-screen w-screen">
+        <Canvas>
+          <ambientLight intensity={0.5} />
+          <Model />
+        </Canvas>
+      </div>
+
       <div className="flex w-full flex-col items-center gap-8">
         <div className="flex flex-col items-center">
           <PendulumStage
@@ -87,10 +97,7 @@ export default function App() {
         </div>
 
         <div className="flex w-full gap-4 sm:gap-5">
-          <TempoControl
-            tempo={tempo}
-            onChange={setTempo}
-          />
+          <TempoControl tempo={tempo} onChange={setTempo} />
 
           <SpeedControl
             speedKey={speedKey}
