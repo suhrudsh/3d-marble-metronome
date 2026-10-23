@@ -88,7 +88,7 @@ export function useMetronome({ tempo, speedMultiplier, numerator, onBeat }) {
   }, [scheduleNote]);
 
   const start = useCallback(() => {
-    if (isPlaying) return;
+    if (isPlaying || isPaused) return;
 
     if (!audioCtxRef.current) {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -108,7 +108,7 @@ export function useMetronome({ tempo, speedMultiplier, numerator, onBeat }) {
 
     setIsPlaying(true);
     setIsPaused(false);
-  }, [isPlaying, scheduler]);
+  }, [isPlaying, isPaused, scheduler]);
 
   const pause = useCallback(() => {
     if (!audioCtxRef.current || !isPlaying) return;
@@ -118,12 +118,12 @@ export function useMetronome({ tempo, speedMultiplier, numerator, onBeat }) {
     clearInterval(elapsedIntervalRef.current);
     // suspend audio processing so sounds stop immediately
     if (audioCtxRef.current.state === "running") audioCtxRef.current.suspend();
-    setIsPlaying(false);
+    // setIsPlaying(false);
     setIsPaused(true);
   }, [isPlaying]);
 
   const resume = useCallback(() => {
-    if (!audioCtxRef.current || isPlaying) return;
+    if (!audioCtxRef.current) return;
     // resume the audio context
     if (audioCtxRef.current.state === "suspended") audioCtxRef.current.resume();
 
@@ -142,12 +142,13 @@ export function useMetronome({ tempo, speedMultiplier, numerator, onBeat }) {
     setIsPlaying(true);
     setIsPaused(false);
     pausedElapsedRef.current = 0;
-  }, [isPlaying, scheduler]);
+  }, [scheduler]);
 
   const stop = useCallback(() => {
     clearTimeout(schedulerIdRef.current);
     clearInterval(elapsedIntervalRef.current);
     setIsPlaying(false);
+    setIsPaused(false);
   }, []);
 
   useEffect(() => () => stop(), [stop]);

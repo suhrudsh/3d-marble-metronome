@@ -3,7 +3,6 @@ import { useImperativeHandle, useRef, useEffect } from "react";
 const ARM_ANGLE = 32;
 const WEIGHT_SHADOW_REST = "drop-shadow(0 0 4px rgba(225,89,47,0.5))";
 const WEIGHT_SHADOW_FLASH = "drop-shadow(0 0 9px rgba(225,89,47,0.9))";
-const PIVOT = { x: 130, y: 128 };
 
 // Which side a given beat index sits on. Beat 0 (the downbeat) is always left.
 const sideFor = (beatIndex) => (beatIndex % 2 === 0 ? -1 : 1);
@@ -120,62 +119,6 @@ export default function PendulumStage({ numerator, beatDuration, ref }) {
           />
         ))}
       </div>
-
-      <svg
-        viewBox="0 0 260 140"
-        className="mx-auto block h-auto w-full max-w-65"
-        aria-hidden="true"
-      >
-        <defs>
-          <linearGradient id="armGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#E9CE95" />
-            <stop offset="70%" stopColor="#C9A15B" />
-          </linearGradient>
-          <radialGradient id="pivotGrad" cx="35%" cy="30%" r="75%">
-            <stop offset="0%" stopColor="#E9CE95" />
-            <stop offset="60%" stopColor="#C9A15B" />
-            <stop offset="100%" stopColor="#7c6335" />
-          </radialGradient>
-        </defs>
-
-        <path
-          d="M 40 128 A 90 90 0 0 1 220 128"
-          fill="none"
-          stroke="#3C2F23"
-          strokeWidth="1.5"
-          strokeDasharray="1 7"
-          strokeLinecap="round"
-        />
-
-        {/* Arm + weight rotate together as one group, pivoting at PIVOT */}
-        <g
-          ref={armGroupRef}
-          className="transition-transform ease-in-out"
-          style={{ transformOrigin: `${PIVOT.x}px ${PIVOT.y}px` }}
-        >
-          <rect
-            x={PIVOT.x - 1.5}
-            y={10}
-            width={3}
-            height={118}
-            rx={1.5}
-            fill="url(#armGrad)"
-            style={{ filter: "drop-shadow(0 0 5px rgba(201,161,91,0.25))" }}
-          />
-          <rect
-            ref={weightRef}
-            x={PIVOT.x - 6}
-            y={4}
-            width={12}
-            height={12}
-            rx={2}
-            className="fill-ember"
-            style={{ filter: WEIGHT_SHADOW_REST }}
-          />
-        </g>
-
-        <circle cx={PIVOT.x} cy={PIVOT.y} r={7} fill="url(#pivotGrad)" />
-      </svg>
     </div>
   );
 }

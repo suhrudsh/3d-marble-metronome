@@ -28,7 +28,10 @@ export default function TempoControl({ tempo, onChange }) {
   };
 
   return (
-    <ControlRow label="Tempo" value={`${tempo} BPM`}>
+    <ControlRow
+      label="Tempo"
+      value={`${tempo} BPM`}
+    >
       <div className="flex items-center gap-2.5">
         <button
           className={stepBtnClass}
