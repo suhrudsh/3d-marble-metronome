@@ -62,7 +62,7 @@ export default function App() {
     <div className="flex min-h-screen items-center justify-center px-3 py-6 sm:px-6 sm:py-10 lg:py-14">
       <div className="from-panel to-base border-line relative w-full max-w-105 rounded-2xl border bg-linear-to-b px-4 pt-6 pb-5 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] sm:rounded-[20px] sm:px-7 sm:pt-8 sm:pb-6 lg:max-w-205 lg:px-10 lg:pt-9 lg:pb-8">
         <p className="text-faint mb-1 text-center font-mono text-[10px] tracking-[0.18em] uppercase sm:text-[11px]">
-          Drum Practice
+          Music Practice
         </p>
         <h1 className="font-display mt-0 mb-5 text-center text-2xl font-bold tracking-wide uppercase sm:text-[28px] lg:mb-8 lg:text-[32px]">
           Metronome
