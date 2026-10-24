@@ -30,7 +30,11 @@ export default function TempoControl({ tempo, onChange }) {
   return (
     <ControlRow
       label="Tempo"
-      value={`${tempo} BPM`}
+      value={tempo}
+      isTempo
+      onChange={onChange}
+      MIN_TEMPO={MIN_TEMPO}
+      MAX_TEMPO={MAX_TEMPO}
     >
       <div className="flex items-center gap-2.5">
         <button
