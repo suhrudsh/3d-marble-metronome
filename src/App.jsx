@@ -59,12 +59,12 @@ export default function App() {
   };
 
   return (
-    <div className="flex h-lvh flex-col items-center justify-between px-6 py-8 md:p-16">
+    <div className="flex h-svh flex-col items-center justify-between px-6 py-8 md:p-12 xl:p-16">
       <div className="flex flex-col items-center xl:gap-2">
-        <p className="font-mono text-xs font-bold tracking-widest text-[#605144] xl:text-2xl">
+        <p className="font-mono text-xs font-bold tracking-widest text-[#605144] md:text-lg 2xl:text-2xl">
           MUSIC PRACTICE
         </p>
-        <h1 className="font-display text-3xl font-bold text-[#f5ead7] xl:text-6xl">
+        <h1 className="font-display text-3xl font-bold text-[#f5ead7] md:text-5xl 2xl:text-6xl">
           METRONOME
         </h1>
       </div>
@@ -87,21 +87,24 @@ export default function App() {
           />
         </div>
 
-        <div className="flex w-full flex-col gap-2 md:flex-row md:gap-4">
-          <TempoControl tempo={tempo} onChange={setTempo} />
+        <div className="flex w-full flex-col gap-2 lg:flex-row lg:gap-4">
+          <div className="grid w-full grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-4">
+            <TempoControl tempo={tempo} onChange={setTempo} />
 
-          <SpeedControl
-            speedKey={speedKey}
-            onChange={setSpeedKey}
-            effectiveBpm={tempo * speedMultiplier}
-          />
-
-          <TimeSignatureControl
-            numerator={numerator}
-            denominator={denominator}
-            onNumeratorChange={setNumerator}
-            onDenominatorChange={setDenominator}
-          />
+            <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-2 lg:col-span-2 lg:gap-4">
+              <SpeedControl
+                speedKey={speedKey}
+                onChange={setSpeedKey}
+                effectiveBpm={tempo * speedMultiplier}
+              />
+              <TimeSignatureControl
+                numerator={numerator}
+                denominator={denominator}
+                onNumeratorChange={setNumerator}
+                onDenominatorChange={setDenominator}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

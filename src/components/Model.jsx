@@ -1,6 +1,7 @@
 import React from "react";
 import { useGLTF, PerspectiveCamera } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+import { useIsMobile } from "./useIsMobile";
 
 function BallMotion({ ballRef, motionRef }) {
   useFrame((_, delta) => {
@@ -22,10 +23,12 @@ function BallMotion({ ballRef, motionRef }) {
   return null;
 }
 
-//TODO: Camera settings on phone set to [0, 9, 0]
-
 export function Model({ ref, motionRef, ...props }) {
   const { nodes, materials } = useGLTF("3D Sphere Metronome.glb");
+  const isMobile = useIsMobile(768);
+  const isLg = useIsMobile(1024);
+  const isXl = useIsMobile(1440);
+  const is2xl = useIsMobile(1536);
 
   return (
     <group {...props} dispose={null}>
@@ -35,7 +38,17 @@ export function Model({ ref, motionRef, ...props }) {
         far={100}
         near={0.1}
         fov={22.895}
-        position={[0, 14, 0.825]}
+        position={
+          isMobile
+            ? [0, 9, 0]
+            : isLg
+              ? [0, 9, 0]
+              : isXl
+                ? [0, 16, 1.35]
+                : is2xl
+                  ? [0, 15, 1.05]
+                  : [0, 14, 0.825]
+        }
         rotation={[-Math.PI / 2, 0, 0]}
       />
       <mesh

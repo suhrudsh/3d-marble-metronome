@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  --color-base: #16120e;
   --color-panel: #211a14;
   --color-raised: #2b2119;
   --color-line: #3c2f23;
@@ -20,7 +19,7 @@
 
 @layer base {
   body {
-    @apply bg-base text-primary font-sans;
+    @apply text-primary font-sans;
     min-height: 100vh;
   }
 }
