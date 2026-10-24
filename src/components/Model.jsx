@@ -24,7 +24,7 @@ function BallMotion({ ballRef, motionRef }) {
 }
 
 export function Model({ ref, motionRef, ...props }) {
-  const { nodes, materials } = useGLTF("3D Sphere Metronome.glb");
+  const { nodes, materials } = useGLTF("3d-marble-metronome-optimised.glb");
   const isMobile = useIsMobile(768);
   const isLg = useIsMobile(1024);
   const isXl = useIsMobile(1440);
@@ -83,4 +83,4 @@ export function Model({ ref, motionRef, ...props }) {
   );
 }
 
-useGLTF.preload("3D Sphere Metronome.glb");
+useGLTF.preload("3d-marble-metronome-optimised.glb");
