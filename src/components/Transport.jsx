@@ -1,7 +1,7 @@
 import { formatElapsed } from "../utils/time";
 
 const iconButtonClasses =
-  "flex size-16 items-center justify-center rounded-full p-4 transition-transform hover:-translate-y-px active:translate-y-0 focus-visible:outline-brass-bright focus-visible:outline-2 focus-visible:outline-offset-[3px] md:size-[4.5rem] 2xl:size-20";
+  "flex size-16 items-center justify-center rounded-full p-4 transition-transform hover:-translate-y-px active:scale-[0.97] active:translate-y-0 focus-visible:outline-brass-bright focus-visible:outline-2 focus-visible:outline-offset-[3px] md:size-[4.5rem] 2xl:size-20";
 
 export default function Transport({
   isPlaying,
@@ -19,7 +19,7 @@ export default function Transport({
         {!isPlaying && (
           <button
             onClick={onStart}
-            className="font-display focus-visible:outline-brass-bright from-brass-bright to-brass rounded-full bg-linear-to-b p-4 px-12 text-2xl tracking-wider text-[#221A13] uppercase shadow-[0_8px_20px_-6px_rgba(201,161,91,0.45)] transition-transform hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-[3px] active:translate-y-0 md:text-4xl 2xl:text-5xl"
+            className="font-display focus-visible:outline-brass-bright from-brass-bright to-brass rounded-full bg-linear-to-b p-4 px-12 text-2xl tracking-wider text-[#221A13] uppercase shadow-[0_8px_20px_-6px_rgba(201,161,91,0.45)] transition-transform hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-[3px] active:translate-y-0 active:scale-[0.97] md:text-4xl 2xl:text-5xl"
           >
             Start
           </button>
