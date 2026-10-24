@@ -44,7 +44,7 @@ export function Model({ ref, motionRef, ...props }) {
             : isLg
               ? [0, 9, 0]
               : isXl
-                ? [0, 16, 1.35]
+                ? [0, 16, 1.3]
                 : is2xl
                   ? [0, 15, 1.05]
                   : [0, 14, 0.825]
