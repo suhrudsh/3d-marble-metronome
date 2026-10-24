@@ -1,5 +1,8 @@
 import { formatElapsed } from "../utils/time";
 
+const iconButtonClasses =
+  "flex size-16 items-center justify-center rounded-full p-4 transition-transform hover:-translate-y-px active:translate-y-0 focus-visible:outline-brass-bright focus-visible:outline-2 focus-visible:outline-offset-[3px] md:size-[4.5rem] 2xl:size-20";
+
 export default function Transport({
   isPlaying,
   isPaused,
@@ -25,9 +28,9 @@ export default function Transport({
         {isPlaying && (
           <button
             onClick={onStop}
-            className="from-ember rounded-full bg-linear-to-b to-[#B84420] p-4 shadow-[0_8px_20px_-6px_rgba(225,89,47,0.4)]"
+            className={`${iconButtonClasses} from-ember bg-linear-to-b to-[#B84420] shadow-[0_8px_20px_-6px_rgba(225,89,47,0.4)]`}
           >
-            <img src="stop.svg" alt="" />
+            <img className="size-8" src="stop.svg" alt="" />
           </button>
         )}
 
@@ -35,27 +38,17 @@ export default function Transport({
         {isPlaying && !isPaused && (
           <button
             onClick={onPause}
-            className={
-              "font-display rounded-full p-4 text-sm font-bold tracking-wider uppercase " +
-              "transition-transform hover:-translate-y-px active:translate-y-0 " +
-              "focus-visible:outline-brass-bright focus-visible:outline-2 focus-visible:outline-offset-[3px] " +
-              "from-brass-bright to-brass bg-linear-to-b text-base shadow-[0_8px_20px_-6px_rgba(201,161,91,0.45)]"
-            }
+            className={`${iconButtonClasses} from-brass-bright to-brass bg-linear-to-b shadow-[0_8px_20px_-6px_rgba(201,161,91,0.45)]`}
           >
-            <img src="pause.svg" alt="" />
+            <img className="size-8" src="pause.svg" alt="" />
           </button>
         )}
         {isPaused && isPlaying && (
           <button
             onClick={onResume}
-            className={
-              "font-display rounded-full p-4 text-sm font-bold tracking-wider uppercase " +
-              "transition-transform hover:-translate-y-px active:translate-y-0 " +
-              "focus-visible:outline-brass-bright focus-visible:outline-2 focus-visible:outline-offset-[3px] " +
-              "from-brass-bright to-brass bg-linear-to-b text-base shadow-[0_8px_20px_-6px_rgba(201,161,91,0.45)]"
-            }
+            className={`${iconButtonClasses} from-brass-bright to-brass bg-linear-to-b shadow-[0_8px_20px_-6px_rgba(201,161,91,0.45)]`}
           >
-            <img src="play.svg" alt="" />
+            <img className="size-8" src="play.svg" alt="" />
           </button>
         )}
       </div>
