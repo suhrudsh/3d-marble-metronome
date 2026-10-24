@@ -3,6 +3,8 @@ import { useGLTF, PerspectiveCamera } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useIsMobile } from "./useIsMobile";
 
+const MODEL_URL = `${import.meta.env.BASE_URL}3d-marble-metronome-optimised.glb`;
+
 function BallMotion({ ballRef, motionRef }) {
   useFrame((_, delta) => {
     const motion = motionRef.current;
@@ -24,7 +26,7 @@ function BallMotion({ ballRef, motionRef }) {
 }
 
 export function Model({ ref, motionRef, ...props }) {
-  const { nodes, materials } = useGLTF("3d-marble-metronome-optimised.glb");
+  const { nodes, materials } = useGLTF(MODEL_URL);
   const isMobile = useIsMobile(768);
   const isLg = useIsMobile(1024);
   const isXl = useIsMobile(1440);
@@ -83,4 +85,4 @@ export function Model({ ref, motionRef, ...props }) {
   );
 }
 
-useGLTF.preload("3d-marble-metronome-optimised.glb");
+useGLTF.preload(MODEL_URL);
