@@ -13,7 +13,7 @@ export default function SpeedControl({ speedKey, onChange, effectiveBpm }) {
             key={opt.key}
             onClick={() => onChange(opt.key)}
             className={
-              "flex-1 cursor-pointer rounded-lg border px-2 py-2 font-mono text-[13px] transition-colors " +
+              "flex-1 cursor-pointer rounded-lg border px-2 py-2 font-mono text-[14px] transition-colors " +
               "focus-visible:outline-brass-bright focus-visible:outline-2 focus-visible:outline-offset-2 " +
               (speedKey === opt.key
                 ? "bg-brass border-brass text-base font-bold"
