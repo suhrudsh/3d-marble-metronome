@@ -15,15 +15,16 @@ export default function ControlRow({
 
   return (
     <div className="bg-raised border-line flex w-full flex-col justify-between gap-4 rounded-xl border p-6">
-      <div className="mb-2 flex items-baseline justify-between">
+      <div className="flex items-baseline justify-between">
         <span className="text-muted font-mono text-xs tracking-[0.14em] uppercase">
           {label}
         </span>
         {value && isTempo ? (
-          <div className="text-brass-bright flex gap-1 bg-transparent text-right font-mono tabular-nums focus:outline-none md:text-2xl">
+          <div className="text-brass-bright flex items-center gap-1 bg-transparent text-right font-mono tabular-nums focus:outline-none md:text-2xl">
             <input
               ref={tempoInputRef}
               type="number"
+              inputMode="numeric"
               min={MIN_TEMPO}
               max={MAX_TEMPO}
               className="field-sizing-content [appearance:textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
@@ -55,7 +56,7 @@ export default function ControlRow({
         )}
       </div>
       {children}
-      {sub && <div className="text-faint mt-0.5 font-mono text-xs">{sub}</div>}
+      {sub && <div className="text-faint font-mono text-xs">{sub}</div>}
     </div>
   );
 }
