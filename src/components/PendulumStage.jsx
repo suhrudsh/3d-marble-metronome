@@ -1,8 +1,8 @@
 import { useImperativeHandle, useRef, useEffect } from "react";
+import { Model } from "./Model";
+import { Canvas } from "@react-three/fiber";
 
-const ARM_ANGLE = 32;
-const WEIGHT_SHADOW_REST = "drop-shadow(0 0 4px rgba(225,89,47,0.5))";
-const WEIGHT_SHADOW_FLASH = "drop-shadow(0 0 9px rgba(225,89,47,0.9))";
+const BALL_POSITION = 1.8;
 
 // Which side a given beat index sits on. Beat 0 (the downbeat) is always left.
 const sideFor = (beatIndex) => (beatIndex % 2 === 0 ? -1 : 1);
@@ -22,10 +22,11 @@ const sideFor = (beatIndex) => (beatIndex % 2 === 0 ? -1 : 1);
  * Direct DOM writes keep the animation locked to audio time.
  */
 export default function PendulumStage({ numerator, beatDuration, ref }) {
-  const armGroupRef = useRef(null);
-  const weightRef = useRef(null);
+  const ballRef = useRef(null);
+  const motionRef = useRef(null);
   const dotRefs = useRef([]);
   const reducedMotionRef = useRef(false);
+  const animationDurationRef = useRef(0);
 
   useEffect(() => {
     reducedMotionRef.current = window.matchMedia(
@@ -33,12 +34,12 @@ export default function PendulumStage({ numerator, beatDuration, ref }) {
     ).matches;
   }, []);
 
-  const positionArmInstant = (beatIndex) => {
-    const group = armGroupRef.current;
-    if (!group) return;
-    group.style.transitionDuration = "0s";
-    group.style.transform = `rotate(${ARM_ANGLE * sideFor(beatIndex)}deg)`;
-    void group.getBoundingClientRect(); // force reflow so the next transition doesn't merge with this snap
+  const positionBallInstant = (beatIndex) => {
+    const ball = ballRef.current;
+    if (!ball) return;
+    animationDurationRef.current = 0;
+    ball.position.x = sideFor(beatIndex) * BALL_POSITION;
+    // void group.getBoundingClientRect(); // force reflow so the next transition doesn't merge with this snap
   };
 
   const highlightDot = (beatIndex) => {
@@ -74,34 +75,32 @@ export default function PendulumStage({ numerator, beatDuration, ref }) {
       onBeat(beatIndex) {
         highlightDot(beatIndex);
 
-        if (!reducedMotionRef.current && armGroupRef.current) {
+        if (!reducedMotionRef.current && ballRef.current) {
           // Snap to this beat's side (should already be here from the
           // previous beat's animation), then animate toward the *next*
           // beat's side so the arm lands exactly when it clicks.
-          positionArmInstant(beatIndex);
+          positionBallInstant(beatIndex);
           const nextBeatIndex = (beatIndex + 1) % numerator;
-          armGroupRef.current.style.transitionDuration = `${beatDuration()}s`;
-          armGroupRef.current.style.transform = `rotate(${ARM_ANGLE * sideFor(nextBeatIndex)}deg)`;
-        }
-
-        if (beatIndex === 0 && weightRef.current) {
-          weightRef.current.style.filter = WEIGHT_SHADOW_FLASH;
-          setTimeout(() => {
-            if (weightRef.current)
-              weightRef.current.style.filter = WEIGHT_SHADOW_REST;
-          }, 90);
+          motionRef.current = {
+            from: ballRef.current.position.x,
+            to: BALL_POSITION * sideFor(nextBeatIndex),
+            rotationFrom: ballRef.current.rotation.z,
+            rotationTo: -Math.PI * sideFor(nextBeatIndex),
+            duration: beatDuration(),
+            elapsed: 0,
+          };
         }
       },
       // Pre-position the arm at the downbeat's side before the first click,
       // so it isn't caught mid-swing when playback starts.
       prepareStart() {
-        positionArmInstant(0);
+        positionBallInstant(0);
       },
       reset() {
         highlightDot(-1);
-        if (armGroupRef.current) {
-          armGroupRef.current.style.transitionDuration = "0s";
-          armGroupRef.current.style.transform = "rotate(0deg)";
+        if (ballRef.current) {
+          animationDurationRef.current = 0;
+          ballRef.current.position.x = -BALL_POSITION;
         }
       },
     }),
@@ -109,16 +108,26 @@ export default function PendulumStage({ numerator, beatDuration, ref }) {
   );
 
   return (
-    <div className="w-full">
-      <div className="mb-2 flex min-h-2.5 justify-center gap-2">
-        {Array.from({ length: numerator }).map((_, i) => (
-          <div
-            key={i}
-            ref={(el) => (dotRefs.current[i] = el)}
-            className="bg-line border-line h-2 w-2 rounded-full border transition-transform duration-75"
-          />
-        ))}
+    <>
+      <div className="absolute top-0 left-0 -z-10 h-screen w-screen">
+        <Canvas>
+          <ambientLight intensity={0.5} />
+          <Model ref={ballRef} motionRef={motionRef} />
+        </Canvas>
+        <div className="absolute top-0 left-0 h-full w-full bg-linear-to-b from-transparent to-[#24150E] to-90%" />
       </div>
-    </div>
+
+      <div className="w-full">
+        <div className="mb-2 flex min-h-2.5 justify-center gap-2">
+          {Array.from({ length: numerator }).map((_, i) => (
+            <div
+              key={i}
+              ref={(el) => (dotRefs.current[i] = el)}
+              className="bg-line border-line h-2 w-2 rounded-full border transition-transform duration-75"
+            />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }

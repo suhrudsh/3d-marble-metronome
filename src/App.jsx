@@ -6,8 +6,6 @@ import TempoControl from "./components/TempoControl";
 import SpeedControl from "./components/SpeedControl";
 import { SPEED_OPTIONS } from "./constants/speed";
 import TimeSignatureControl from "./components/TimeSignatureControl";
-import { Canvas } from "@react-three/fiber";
-import { Model } from "./components/Model";
 
 export default function App() {
   const [tempo, setTempo] = useState(120);
@@ -69,14 +67,6 @@ export default function App() {
         <h1 className="font-display text-6xl font-bold text-[#f5ead7]">
           METRONOME
         </h1>
-      </div>
-
-      <div className="absolute top-0 left-0 -z-10 h-screen w-screen">
-        <Canvas>
-          <ambientLight intensity={0.5} />
-          <Model />
-        </Canvas>
-        <div className="absolute top-0 left-0 h-full w-full bg-linear-to-b from-transparent to-[#24150E] to-90%" />
       </div>
 
       <div className="flex w-full flex-col items-center gap-8">
