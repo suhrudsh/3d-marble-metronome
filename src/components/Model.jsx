@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF, PerspectiveCamera } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 
@@ -22,6 +22,8 @@ function BallMotion({ ballRef, motionRef }) {
   return null;
 }
 
+//TODO: Camera settings on phone set to [0, 9, 0]
+
 export function Model({ ref, motionRef, ...props }) {
   const { nodes, materials } = useGLTF("3D Sphere Metronome.glb");
 
@@ -33,7 +35,7 @@ export function Model({ ref, motionRef, ...props }) {
         far={100}
         near={0.1}
         fov={22.895}
-        position={[0, 14.286, 0.9]}
+        position={[0, 14, 0.825]}
         rotation={[-Math.PI / 2, 0, 0]}
       />
       <mesh

@@ -28,7 +28,7 @@ export default function TimeSignatureControl({
           >
             &minus;
           </button>
-          <span className="text-brass-bright min-w-4.5 text-center font-mono text-xl">
+          <span className="text-brass-bright min-w-4.5 text-center font-mono md:text-2xl">
             {numerator}
           </span>
           <button
@@ -48,7 +48,7 @@ export default function TimeSignatureControl({
               key={val}
               onClick={() => onDenominatorChange(val)}
               className={
-                "cursor-pointer rounded-lg border px-3 py-1.5 font-mono text-[13px] " +
+                "cursor-pointer rounded-lg border px-3 py-1.5 font-mono text-xs md:text-[14px] " +
                 "focus-visible:outline-brass-bright focus-visible:outline-2 focus-visible:outline-offset-2 " +
                 (denominator === val
                   ? "bg-brass border-brass text-base font-bold"

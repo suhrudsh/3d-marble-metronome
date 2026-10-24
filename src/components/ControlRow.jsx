@@ -20,7 +20,7 @@ export default function ControlRow({
           {label}
         </span>
         {value && isTempo ? (
-          <div className="text-brass-bright flex gap-1 bg-transparent text-right font-mono text-2xl tabular-nums focus:outline-none">
+          <div className="text-brass-bright flex gap-1 bg-transparent text-right font-mono tabular-nums focus:outline-none md:text-2xl">
             <input
               ref={tempoInputRef}
               type="number"
@@ -49,7 +49,7 @@ export default function ControlRow({
             <span>BPM</span>
           </div>
         ) : (
-          <span className="text-brass-bright font-mono text-2xl tabular-nums">
+          <span className="text-brass-bright font-mono tabular-nums md:text-2xl">
             {value}
           </span>
         )}

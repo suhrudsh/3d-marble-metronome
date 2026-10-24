@@ -59,18 +59,18 @@ export default function App() {
   };
 
   return (
-    <div className="flex h-screen flex-col items-center justify-between p-16">
-      <div className="flex flex-col items-center gap-2">
-        <p className="font-mono font-bold tracking-widest text-[#605144]">
+    <div className="flex h-lvh flex-col items-center justify-between px-6 py-8 md:p-16">
+      <div className="flex flex-col items-center xl:gap-2">
+        <p className="font-mono text-xs font-bold tracking-widest text-[#605144] xl:text-2xl">
           MUSIC PRACTICE
         </p>
-        <h1 className="font-display text-6xl font-bold text-[#f5ead7]">
+        <h1 className="font-display text-3xl font-bold text-[#f5ead7] xl:text-6xl">
           METRONOME
         </h1>
       </div>
 
-      <div className="flex w-full flex-col items-center gap-8">
-        <div className="flex flex-col items-center">
+      <div className="flex w-full flex-col items-center gap-4 xl:gap-8">
+        <div className="flex w-full flex-col items-center gap-4">
           <PendulumStage
             ref={pendulumRef}
             numerator={numerator}
@@ -87,7 +87,7 @@ export default function App() {
           />
         </div>
 
-        <div className="flex w-full gap-4 sm:gap-5">
+        <div className="flex w-full flex-col gap-2 md:flex-row md:gap-4">
           <TempoControl tempo={tempo} onChange={setTempo} />
 
           <SpeedControl

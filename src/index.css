@@ -21,9 +21,6 @@
 @layer base {
   body {
     @apply bg-base text-primary font-sans;
-    background:
-      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(201, 161, 91, 0.08), transparent),
-      #16120e;
     min-height: 100vh;
   }
 }

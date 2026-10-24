@@ -109,16 +109,16 @@ export default function PendulumStage({ numerator, beatDuration, ref }) {
 
   return (
     <>
-      <div className="absolute top-0 left-0 -z-10 h-screen w-screen">
+      <div className="relative -z-10 aspect-video w-screen md:absolute md:top-0 md:left-0 md:aspect-auto md:h-screen">
         <Canvas>
           <ambientLight intensity={0.5} />
           <Model ref={ballRef} motionRef={motionRef} />
         </Canvas>
-        <div className="absolute top-0 left-0 h-full w-full bg-linear-to-b from-transparent to-[#24150E] to-90%" />
+        <div className="absolute top-0 left-0 h-full w-full bg-linear-to-b from-[#24150E] via-transparent to-[#24150E] md:via-none md:from-transparent md:to-90%" />
       </div>
 
       <div className="w-full">
-        <div className="mb-2 flex min-h-2.5 justify-center gap-2">
+        <div className="flex min-h-2.5 justify-center gap-2">
           {Array.from({ length: numerator }).map((_, i) => (
             <div
               key={i}

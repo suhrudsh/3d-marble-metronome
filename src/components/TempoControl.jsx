@@ -62,12 +62,18 @@ export default function TempoControl({ tempo, onChange }) {
           +
         </button>
         <button
-          className="text-muted border-line hover:text-brass-bright hover:border-brass focus-visible:outline-brass-bright shrink-0 cursor-pointer rounded-lg border bg-transparent px-2.5 py-1.5 font-mono text-[11px] tracking-wider uppercase focus-visible:outline-2 focus-visible:outline-offset-2"
+          className="text-muted border-line hover:text-brass-bright hover:border-brass focus-visible:outline-brass-bright hidden shrink-0 cursor-pointer rounded-lg border bg-transparent px-2.5 py-1.5 font-mono text-xs tracking-wider uppercase focus-visible:outline-2 focus-visible:outline-offset-2 md:block"
           onClick={handleTap}
         >
           Tap
         </button>
       </div>
+      <button
+        className="text-muted border-line hover:text-brass-bright hover:border-brass focus-visible:outline-brass-bright shrink-0 cursor-pointer rounded-lg border bg-transparent px-2.5 py-1.5 font-mono text-xs tracking-wider uppercase focus-visible:outline-2 focus-visible:outline-offset-2 md:hidden"
+        onClick={handleTap}
+      >
+        Tap
+      </button>
     </ControlRow>
   );
 }
