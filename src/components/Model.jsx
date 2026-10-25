@@ -1,7 +1,7 @@
 import React from "react";
 import { useGLTF, PerspectiveCamera } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useIsMobile } from "./useIsMobile";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 const MODEL_URL = `${import.meta.env.BASE_URL}3d-marble-metronome-optimised.glb`;
 
