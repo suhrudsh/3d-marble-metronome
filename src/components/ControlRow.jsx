@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function ControlRow({
   label,
@@ -12,6 +12,14 @@ export default function ControlRow({
   onChange,
 }) {
   const [draft, setDraft] = useState(String(value));
+  const lastInputValueRef = useRef(value);
+
+  useEffect(() => {
+    if (value !== lastInputValueRef.current) {
+      setDraft(String(value));
+      lastInputValueRef.current = value;
+    }
+  }, [value]);
 
   return (
     <div className="bg-raised border-line flex w-full flex-col justify-between gap-4 rounded-xl border p-6">
@@ -35,6 +43,7 @@ export default function ControlRow({
 
                 const next = Number(text);
                 if (text !== "" && next >= MIN_TEMPO && next <= MAX_TEMPO) {
+                  lastInputValueRef.current = next;
                   onChange(next);
                 }
               }}
@@ -44,6 +53,7 @@ export default function ControlRow({
                   Math.max(MIN_TEMPO, Number(draft) || MIN_TEMPO),
                 );
                 setDraft(String(next));
+                lastInputValueRef.current = next;
                 onChange(next);
               }}
             />
